@@ -1,24 +1,13 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
-
-import Home from "./pages/Home";
-import Hotels from "./pages/Hotels";
-import HotelDetails from "./pages/HotelDetails";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Assistant from "./pages/Assistant";
-import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
 
-function App() {
+export default function App() {
   return (
-    // Змінили BrowserRouter на HashRouter. Тут basename більше не потрібен!
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/hotels" element={<Hotels />} />
-        <Route path="/hotels/:id" element={<HotelDetails />} />
-        <Route path="/assistant" element={<Assistant />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </HashRouter>
+    <Routes>
+      <Route path="/" element={<Navigate to="/assistant" replace />} />
+      <Route path="/assistant" element={<Assistant />} />
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
   );
 }
-
-export default App;
