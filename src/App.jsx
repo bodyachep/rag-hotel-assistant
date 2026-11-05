@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Hotels from "./pages/Hotels";
@@ -8,7 +8,8 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <BrowserRouter basename="/rag-hotel-assistant/">
+    // Змінили BrowserRouter на HashRouter. Тут basename більше не потрібен!
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<Hotels />} />
@@ -16,7 +17,7 @@ function App() {
         <Route path="/assistant" element={<Assistant />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
