@@ -154,3 +154,45 @@
   background: #dcfce7;
   color: #16a34a;
 }
+/* --- АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (Home.css) --- */
+@media (max-width: 768px) {
+  .dashboard-layout {
+    padding: 20px 15px;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr; /* По 2 картки в ряд на планшетах */
+    gap: 16px;
+  }
+
+  .activity-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .activity-status {
+    justify-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr; /* По 1 картці в ряд на малих екранах */
+  }
+  
+  .stat-card {
+    padding: 16px;
+  }
+}

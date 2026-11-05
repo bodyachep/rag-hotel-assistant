@@ -196,3 +196,30 @@
   background: #cbd5e1;
   cursor: not-allowed;
 }
+/* --- АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (Assistant.css) --- */
+@media (max-width: 768px) {
+  .assistant-layout {
+    padding: 0;
+    /* Використовуємо dvh (dynamic viewport height) для телефонів, щоб врахувати панель адреси */
+    height: 100dvh; 
+  }
+
+  .chat-container {
+    height: 100dvh;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .messages-area {
+    padding: 15px;
+  }
+
+  .message-wrapper {
+    max-width: 95%; /* Даємо більше місця для тексту на телефоні */
+  }
+
+  .input-area {
+    padding: 15px;
+  }
+}
