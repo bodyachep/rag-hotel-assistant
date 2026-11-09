@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RAG Hotel Assistant - Головні стилі
+   RAG Hotel Assistant - Повний набір стилів
    ========================================================================== */
 
 .assistant-layout {
@@ -49,6 +49,21 @@
   color: #6366f1;
 }
 
+.status-indicator-dot {
+  width: 9px;
+  height: 9px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
 .chat-header h2 {
   font-size: 20px;
   font-weight: 800;
@@ -70,6 +85,46 @@
   padding: 5px 12px;
   border-radius: 20px;
   border: 1px solid #e2e8f0;
+}
+
+/* --- Швидкі підказки --- */
+.quick-prompts-container {
+  padding: 8px 24px 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-title {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-chip-btn {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-chip-btn:hover:not(:disabled) {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4f46e5;
+  transform: translateY(-1px);
 }
 
 /* --- Область повідомлень --- */
@@ -155,6 +210,69 @@
   margin: 0;
 }
 
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 15px;
+  background-color: #6366f1;
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* --- Індикатор розумового процесу / 3D Куб --- */
+.ai-thinking-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  background: #ffffff;
+  border-radius: 16px;
+  width: fit-content;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.ai-3d-loader {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateLoader 3s infinite linear;
+}
+
+.loader-face {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: rgba(99, 102, 241, 0.25);
+  border: 1.5px solid #6366f1;
+  border-radius: 4px;
+}
+
+.face-front  { transform: translateZ(11px); }
+.face-back   { transform: rotateY(180deg) translateZ(11px); }
+.face-left   { transform: rotateY(-90deg) translateZ(11px); }
+.face-right  { transform: rotateY(90deg) translateZ(11px); }
+.face-top    { transform: rotateX(90deg) translateZ(11px); }
+.face-bottom { transform: rotateX(-90deg) translateZ(11px); }
+
+@keyframes rotateLoader {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.thinking-text {
+  font-size: 13px;
+  color: #64748b;
+  font-style: italic;
+}
+
 /* --- Сітка карток готелів --- */
 .hotels-results-grid {
   display: grid;
@@ -218,12 +336,11 @@
   overflow: hidden;
 }
 
-/* Бейджі зручностей на картці */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 14px; /* Забезпечує чіткий розрив перед футером */
+  margin-bottom: 14px;
 }
 
 .tag {
@@ -236,14 +353,13 @@
   border-radius: 8px;
 }
 
-.tag.green { background: #dcfce7; color: #166534; }
+.tag.green  { background: #dcfce7; color: #166534; }
 .tag.orange { background: #ffedd5; color: #9a3412; }
-.tag.blue { background: #e0e7ff; color: #3730a3; }
-.tag.teal { background: #ccfbf1; color: #0f766e; }
+.tag.blue   { background: #e0e7ff; color: #3730a3; }
+.tag.teal   { background: #ccfbf1; color: #0f766e; }
 .tag.purple { background: #f3e8ff; color: #7e22ce; }
-.tag.grey { background: #f1f5f9; color: #64748b; }
+.tag.grey   { background: #f1f5f9; color: #64748b; }
 
-/* Футер картки */
 .card-footer {
   display: flex;
   align-items: center;
@@ -279,48 +395,6 @@
 
 .book-mini-btn:hover {
   background: #4f46e5;
-}
-
-/* --- 3D Індикатор завантаження --- */
-.ai-thinking-container {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 18px;
-  background: #ffffff;
-  border-radius: 16px;
-  width: fit-content;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-
-.ai-3d-loader {
-  width: 22px;
-  height: 22px;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: rotateLoader 3s infinite linear;
-}
-
-.loader-face {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  background: rgba(99, 102, 241, 0.25);
-  border: 1.5px solid #6366f1;
-  border-radius: 4px;
-}
-
-.face-front  { transform: translateZ(11px); }
-.face-back   { transform: rotateY(180deg) translateZ(11px); }
-.face-left   { transform: rotateY(-90deg) translateZ(11px); }
-.face-right  { transform: rotateY(90deg) translateZ(11px); }
-.face-top    { transform: rotateX(90deg) translateZ(11px); }
-.face-bottom { transform: rotateX(-90deg) translateZ(11px); }
-
-@keyframes rotateLoader {
-  0% { transform: rotateX(0deg) rotateY(0deg); }
-  100% { transform: rotateX(360deg) rotateY(360deg); }
 }
 
 /* --- Поле вводу --- */
@@ -385,26 +459,28 @@
 }
 
 /* ==========================================================================
-   МОДАЛЬНЕ ВІКНО ДЕТАЛЕЙ ГОТЕЛЮ
+   МОДАЛЬНЕ ВІКНО БРОНЮВАННЯ ТА КАТЕГОРІЙ НОМЕРІВ
    ========================================================================== */
 
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
+  background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 20px;
+  padding: 16px;
 }
 
 .hotel-modal {
   background: #ffffff;
   border-radius: 24px;
-  max-width: 540px;
+  max-width: 620px;
   width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 28px;
   position: relative;
   box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
@@ -416,12 +492,12 @@
 
 .modal-close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 18px;
+  right: 18px;
   background: #f1f5f9;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -429,6 +505,7 @@
   cursor: pointer;
   color: #64748b;
   transition: all 0.2s;
+  z-index: 10;
 }
 
 .modal-close-btn:hover {
@@ -436,67 +513,300 @@
   color: #0f172a;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.badge-city {
-  background: #e0e7ff;
-  color: #4338ca;
+.modal-header-info .modal-city {
+  display: inline-block;
+  font-size: 11px;
   font-weight: 700;
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 8px;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
 }
 
-.hotel-modal h2 {
-  margin: 0;
+.modal-header-info h2 {
+  margin: 0 0 6px 0;
   font-size: 22px;
   font-weight: 800;
   color: #0f172a;
 }
 
-.modal-desc {
-  margin: 0;
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: #475569;
-}
-
-.modal-info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px 14px;
-  background: #f8fafc;
-  border-radius: 12px;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.modal-header-info .modal-desc {
   font-size: 13px;
-  color: #334155;
-  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
 }
 
-.modal-features h4 {
-  margin: 0 0 10px 0;
+.section-title {
   font-size: 14px;
   font-weight: 700;
+  color: #334155;
+  margin: 12px 0 4px 0;
+}
+
+/* --- Сітка категорій номерів (Tiers) --- */
+.rooms-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tier-card {
+  position: relative;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px;
+  cursor: pointer;
+  background: #ffffff;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+  box-sizing: border-box;
+}
+
+.tier-card:hover {
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+}
+
+.tier-card.selected {
+  border-color: #4f46e5;
+  background: #f5f7ff;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.18);
+}
+
+.tier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.tier-badge {
+  font-size: 11px;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tier-capacity {
+  font-size: 11px;
+  color: #64748b;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tier-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 6px 0;
+  line-height: 1.3;
+}
+
+.tier-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.tier-price {
+  font-size: 14px;
+  font-weight: 800;
   color: #0f172a;
 }
 
-/* Сітка 12 зручностей */
+.tier-left {
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* === ЗОЛОТИЙ ПЕРЕЛИВ ДЛЯ ROYAL GOLD VIP === */
+.tier-card.gold-card {
+  background: linear-gradient(135deg, #fffdf0 0%, #fef3c7 40%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+  overflow: hidden;
+}
+
+.tier-card.gold-card::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.85) 50%,
+    transparent 70%
+  );
+  transform: rotate(25deg);
+  animation: goldShimmer 3s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes goldShimmer {
+  0%   { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+.tier-card.gold-card.selected {
+  border-color: #d97706;
+  box-shadow: 0 0 20px rgba(217, 119, 6, 0.5);
+}
+
+.gold-badge {
+  background: linear-gradient(90deg, #d97706, #b45309) !important;
+  color: #ffffff !important;
+}
+
+/* --- Форма бронювання --- */
+.booking-form-tiered {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.booking-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.input-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-field-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.input-field-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.booking-inputs-grid input,
+.booking-date-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 13.5px;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.booking-inputs-grid input:focus,
+.booking-date-input:focus {
+  border-color: #4f46e5;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.booking-inputs-grid input::placeholder,
+.booking-date-input::placeholder {
+  color: #94a3b8;
+}
+
+.booking-error-text {
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 600;
+  background: #fef2f2;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #fee2e2;
+}
+
+.booking-inputs-grid input {
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 13.5px;
+  outline: none;
+  background: #f8fafc;
+}
+
+.booking-inputs-grid input:focus {
+  border-color: #4f46e5;
+  background: #ffffff;
+}
+
+.booking-error-text {
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.modal-book-btn {
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-book-btn:hover {
+  background: #4338ca;
+}
+
+.modal-book-btn.gold-btn {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+}
+
+.modal-book-btn.gold-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5);
+}
+
+/* Картка підтвердження бронювання */
+.booking-confirmed-card {
+  padding: 18px;
+  background: #f0fdf4;
+  border: 2px solid #86efac;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+/* --- Сітка зручностей (12 штук) --- */
 .amenities-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  max-height: 220px;
+  max-height: 200px;
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -538,212 +848,80 @@
   color: #94a3b8;
 }
 
-.modal-footer {
+/* Кнопки швидкого уточнення міста в повідомленні AI */
+.clarification-chips {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 6px;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
 }
 
-.modal-price-label {
-  font-size: 12px;
-  color: #64748b;
-}
-
-.modal-price {
-  font-size: 22px;
-  font-weight: 800;
-  color: #0f172a;
-}
-
-.modal-book-btn {
-  background: #6366f1;
-  color: #ffffff;
-  border: none;
-  padding: 12px 22px;
-  font-size: 14px;
-  font-weight: 700;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.modal-book-btn:hover {
-  background: #4f46e5;
-}
-
-.modal-book-btn.success {
-  background: #10b981;
-}
-
-.admin-open-btn {
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  color: #334155;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.admin-open-btn:hover {
-  background: #e2e8f0;
-  color: #0f172a;
-}
-
-.admin-modal {
-  max-width: 600px;
-}
-
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.badge-count {
-  font-size: 12px;
-  background: #e0e7ff;
+.clarification-btn {
+  background: #ffffff;
+  border: 1.5px solid #c7d2fe;
   color: #4338ca;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 8px;
-}
-
-.admin-tabs {
-  display: flex;
-  gap: 8px;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 8px;
-}
-
-.admin-tab-btn {
-  background: none;
-  border: none;
   font-size: 13px;
   font-weight: 600;
-  color: #64748b;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.08);
 }
 
-.admin-tab-btn.active {
-  background: #6366f1;
+.clarification-btn:hover {
+  background: #4f46e5;
   color: #ffffff;
+  border-color: #4f46e5;
+  transform: translateY(-1px);
 }
 
-.admin-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.form-row {
-  display: flex;
-  gap: 12px;
-}
-
-.form-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.form-group label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #475569;
-}
-
-.form-group input, .form-group textarea {
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 13px;
-  outline: none;
-}
-
-.admin-checkboxes {
+/* Блок вибору дат (Міні-календар) */
+.dates-picker-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  font-size: 13px;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+}
+
+.dates-picker-container .input-field-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   color: #334155;
-}
-
-.admin-save-btn {
-  background: #10b981;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
   font-weight: 700;
+}
+
+.calendar-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #0f172a;
+  background: #ffffff;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  margin-top: 6px;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s;
 }
 
-.admin-upload-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 24px;
-  border: 2px dashed #cbd5e1;
-  border-radius: 16px;
-  text-align: center;
+.calendar-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
-.admin-alert-success {
-  background: #dcfce7;
-  color: #166534;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+@media (max-width: 640px) {
+  .dates-picker-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-.admin-footer-reset {
-  display: flex;
-  justify-content: flex-end;
-  border-top: 1px solid #f1f5f9;
-  padding-top: 10px;
-}
-
-.btn-reset {
-  background: none;
-  border: none;
-  color: #94a3b8;
-  font-size: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.btn-reset:hover {
-  color: #ef4444;
-}
-
-/* Адаптивність для планшетів та смартфонів */
+/* --- Адаптивність для смартфонів --- */
 @media (max-width: 640px) {
   .chat-container {
     height: 94vh;
@@ -756,5 +934,23 @@
 
   .amenities-grid {
     grid-template-columns: 1fr;
+  }
+
+  .booking-inputs-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .rooms-tier-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .tier-card {
+    min-height: auto;
+    padding: 12px;
+  }
+  .hotel-modal {
+    padding: 20px 16px;
+    max-height: 92vh;
   }
 }
